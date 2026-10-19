@@ -1,0 +1,61 @@
+- !<AssetImportMetadata/97b7de22-ad7f-48b6-ab8a-869508d99155>
+  ImportedAssetIds:
+    TypeScriptAsset: !<reference> 5f26f48d-cf03-44d5-9447-07ef68eab0c6
+  ImporterName: TypeScriptAssetImporter
+  PrimaryAsset: !<reference> 5f26f48d-cf03-44d5-9447-07ef68eab0c6
+  PackageType: NotAPackage
+  LegacyPackagePolicy: ~
+  ExtraData:
+    {}
+  AssetDataMap:
+    TypeScriptAsset: !<own> 507ad744-7d9a-459b-b514-8e112799c336
+  DependentFiles:
+    []
+  ImporterSettings: !<AssetImporterSettings>
+    {}
+  CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
+- !<TypeScriptAssetData/507ad744-7d9a-459b-b514-8e112799c336>
+  SvgIcon: ""
+  SetupScript:
+    code: ""
+  Description: ""
+  VersionMajor: 0
+  VersionMinor: 0
+  VersionPatch: 0
+  VersionPrerelease: ""
+  UpdateOrder: 0
+  ComponentUid: ba5dddcd-8aee-4db5-8529-7bae698f46c3
+  ExportUid: 00000000-0000-0000-0000-000000000000
+  PackagePolicy: CanBeUnpacked
+  ScriptInputsHidden:
+    toneDown: false
+    toneUp: false
+    volume: false
+  ScriptTypesHidden:
+    {}
+  ReadMe: !<reference> 00000000-0000-0000-0000-000000000000
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000
+  Tags:
+    []
+  Attachments:
+    []
+  DefaultScriptInputs:
+    - toneUp: !<reference.AudioTrackAsset> 00000000-0000-0000-0000-000000000000
+      toneDown: !<reference.AudioTrackAsset> 00000000-0000-0000-0000-000000000000
+      volume: 0.800000
+  ScriptTypes:
+    -
+      {}
+  InputLines:
+    - '// @ui {"widget":"label", "label":"<span style=\"color: #60A5FA;\">ShelfCountAudioController – plus/minus tones</span>"}'
+    - '// @ui {"widget":"separator"}'
+    - '// @ui {"widget":"label", "label":"<span style=\"color: #60A5FA;\">References</span>"}'
+    - '// @ui {"widget":"group_start", "label":"References"}'
+    - '// @input Asset.AudioTrackAsset toneUp {"hint":"Short higher tone played on plus"}'
+    - '// @input Asset.AudioTrackAsset toneDown {"hint":"Short lower tone played on minus"}'
+    - '// @ui {"widget":"group_end"}'
+    - '// @ui {"widget":"separator"}'
+    - '// @ui {"widget":"label", "label":"<span style=\"color: #60A5FA;\">Settings</span>"}'
+    - '// @ui {"widget":"group_start", "label":"Settings"}'
+    - '// @input float volume = 0.8 {"hint":"Tone volume", "widget":"slider", "min":0, "max":1, "step":0.05}'
+    - '// @ui {"widget":"group_end"}'

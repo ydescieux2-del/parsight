@@ -1,0 +1,49 @@
+- !<AssetImportMetadata/deabd09d-82cc-48f7-a1bd-b723b02bf00d>
+  ImportedAssetIds:
+    TypeScriptAsset: !<reference> f5be3a8e-a4e2-41cc-871f-9ab530081ca1
+  ImporterName: TypeScriptAssetImporter
+  PrimaryAsset: !<reference> f5be3a8e-a4e2-41cc-871f-9ab530081ca1
+  PackageType: NotAPackage
+  LegacyPackagePolicy: ~
+  ExtraData:
+    {}
+  AssetDataMap:
+    TypeScriptAsset: !<own> 24e284ec-c846-448e-9e66-cb7e6f758fc1
+  DependentFiles:
+    []
+  ImporterSettings: !<AssetImporterSettings>
+    {}
+  CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
+- !<TypeScriptAssetData/24e284ec-c846-448e-9e66-cb7e6f758fc1>
+  SvgIcon: ""
+  SetupScript:
+    code: ""
+  Description: ""
+  VersionMajor: 0
+  VersionMinor: 0
+  VersionPatch: 0
+  VersionPrerelease: ""
+  UpdateOrder: 0
+  ComponentUid: 2c45e6eb-05b4-4794-9a4b-68f1ba055265
+  ExportUid: 00000000-0000-0000-0000-000000000000
+  PackagePolicy: CanBeUnpacked
+  ScriptInputsHidden:
+    glassMaterial: false
+    material: false
+  ScriptTypesHidden:
+    {}
+  ReadMe: !<reference> 00000000-0000-0000-0000-000000000000
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000
+  Tags:
+    []
+  Attachments:
+    []
+  DefaultScriptInputs:
+    - material: !<reference.Material> 00000000-0000-0000-0000-000000000000
+      glassMaterial: !<reference.Material> 00000000-0000-0000-0000-000000000000
+  ScriptTypes:
+    -
+      {}
+  InputLines:
+    - '// @input Asset.Material material {"hint":"Vertex color material (vertexBaseColorMaterial)"}'
+    - '// @input Asset.Material glassMaterial {"hint":"Material for the translucent bins (Add blend, two sided)"}'
