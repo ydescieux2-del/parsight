@@ -34,3 +34,4 @@ leaf_plugin_settings.json
 # Global gitignore drops *.wav; the Lens needs its two tones.
 !Assets/GeneratedSFX/*.wav
 .virtual-scene.runtime.json
+__pycache__/
