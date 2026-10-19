@@ -48,6 +48,10 @@ export class ShelfCountFindArrow extends BaseScriptComponent {
   @hint("Vertical reach toward the edge of the view (cm at that distance); the display is taller than wide")
   edgeYCm: number = 28
 
+  @input
+  @hint("Pulse rate of the arrow (beats per second)")
+  pulseHz: number = 1.4
+
   private arrow: SceneObject
   private targetKey: string | null = null
   private showing = false
@@ -96,9 +100,13 @@ export class ShelfCountFindArrow extends BaseScriptComponent {
     const len = Math.hypot(dx, dy)
     this.dir2 = len > 1e-4 ? new vec2(dx / len, dy / len) : new vec2(0, -1)
     const t = this.arrow.getTransform()
+    // Pulse: grow a little and nudge toward the bins, so it reads as "this way".
+    const beat = 0.5 + 0.5 * Math.sin(getTime() * Math.PI * 2 * this.pulseHz)
+    const nudge = 1.5 * beat
     t.setWorldPosition(camPos.add(fwd.uniformScale(this.distanceCm))
-      .add(right.uniformScale(this.dir2.x * this.edgeXCm))
-      .add(up.uniformScale(this.dir2.y * this.edgeYCm)))
+      .add(right.uniformScale(this.dir2.x * (this.edgeXCm + nudge)))
+      .add(up.uniformScale(this.dir2.y * (this.edgeYCm + nudge))))
+    t.setLocalScale(vec3.one().uniformScale(1 + 0.18 * beat))
     const spin = quat.angleAxis(Math.atan2(this.dir2.y, this.dir2.x), vec3.forward())
     t.setWorldRotation(cam.getWorldRotation().multiply(spin))
     this.setShowing(true)

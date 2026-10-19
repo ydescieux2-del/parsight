@@ -16,7 +16,7 @@ import {FlexAlign, FlexDirection, FlexJustify} from "SpectaclesUIKit.lspkg/Scrip
 import Event, {PublicApi} from "SpectaclesInteractionKit.lspkg/Utils/Event"
 
 const LABEL_SIZE = 62       // same as the supply panel labels, read from ~1 m
-const CAPTION_SIZE = 50
+const CAPTION_SIZE = 66     // "Find" leads the row, a touch larger than the item labels
 const PLATE_COLOR = new vec4(0.42, 0.46, 0.52, 0.9)
 const PLATE_BORDER = new vec4(0.77, 0.81, 0.87, 1)
 const ACTIVE_LABEL = new vec4(0.45, 1.0, 1.0, 1)   // matches the bin glow
@@ -52,7 +52,7 @@ export class ShelfCountFindPanelUI extends BaseScriptComponent {
   onAwake() {
     const h = this.buttonHeightCm
     const widths = this.labels.map((l) => Math.max(8, l.length * 0.9 + 2))
-    const captionW = 6
+    const captionW = 7.5
     const W = captionW + widths.reduce((a, b) => a + b, 0) + GAP * this.labels.length + PAD * 2
     const H = h + PAD * 2
 
@@ -90,7 +90,8 @@ export class ShelfCountFindPanelUI extends BaseScriptComponent {
     const items: FlexItem[] = []
     const captionObj = this.obj(content, "FindCaption")
     this.liftInZ(captionObj, LAYOUT_Z_LIFT)
-    this.makeText(captionObj, "Find", CAPTION_SIZE, captionW, h)
+    const caption = this.makeText(captionObj, "Find", CAPTION_SIZE, captionW, h)
+    ;(caption as Text & {weight?: number}).weight = 800
     items.push(this.item(captionObj, captionW, h))
     this.keys.forEach((key, i) => {
       items.push(this.makeButton(content, key, this.labels[i] ?? key, widths[i], h))
