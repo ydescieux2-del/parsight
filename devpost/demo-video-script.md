@@ -9,7 +9,7 @@ Stats in narration are the sourced ones from design-brief.md; keep wording as ca
 |---|---|---|---|
 | 1 | 0:00–0:12 | Title card: "ParSight. Par counts where the supplies are." Subtitle: Snap Specs, built in Lens Studio. | Every hospital floor has a clean supply room. Every bin in it has a par level. And every day, someone counts them by hand. |
 | 2 | 0:12–0:32 | Caption card with the three numbers, one at a time. | In one emergency department study, nurses left the room for supplies eight times a shift. Supplies are about fifteen percent of hospital spending. And the count is still a clipboard or a handheld scanner, in gloved hands. |
-| 3 | 0:32–0:45 | Preview, start pose: wire shelf, bins, control panel on top. Slow tilt down. | ParSight puts the count on the shelf itself. This is a stand-in supply shelf: saline flushes, IV start kits, Foley catheter kits. |
+| 3 | 0:32–0:45 | Preview, wide pose (Von 2026-10-19): camera at (0, 0, 161) looking at (0, -80, -89), whole unit with all three cards and the control panel in frame. Slow push in to eye level for shot 4. | ParSight puts the count on the shelf itself. This is a stand-in supply shelf: saline flushes, IV start kits, Foley catheter kits. |
 | 4 | 0:45–1:05 | Look at top shelf. Card brightens from dim. Close-up of "26 / 26 of 40", amber. | Each shelf has a label card at real size. It shows the count against par. Flushes are at twenty six of forty, so the card is amber. Cards you aren't looking at dim, so they stay findable without getting in the way. |
 | 5 | 1:05–1:25 | Pinch plus twice (26→28), minus once (28→27). Tones audible. | Stock goes in, pinch plus. Stock comes out, pinch minus. Nothing to touch, nothing to wipe down, and your eyes never leave the shelf. |
 | 6 | 1:25–1:40 | Look down to bottom shelf: red card, 0 of 8, empty bins. | Foley kits are at zero. The card turns red. |
@@ -18,7 +18,7 @@ Stats in narration are the sourced ones from design-brief.md; keep wording as ca
 | 9 | 2:12–2:30 | Caption card: "Logic proven: 4 of 4 LEAF tests pass in preview." "Next: real item recognition, tie in to the hospital's par system." | All four behaviors are covered by automated LEAF tests in Lens Studio. Next comes counting the bins automatically, and connecting to the hospital's own par and requisition system. ParSight. |
 
 ## Shot notes
-- Record at the preview's default pose height (eye level about 1.5 m, 1 m from the shelf). Move with WASD/QE, look with right-drag.
+- Open on the wide pose (shot 3), then work at eye level (about 1.5 m high, 1 m from the shelf) for shots 4 to 8. Move with WASD/QE, look with right-drag.
 - Refresh the preview before recording; a LEAF test run leaves its result text at top left until refresh.
 - Start state must be 26 / 20 / 0. Refresh the preview before each take.
 - No patients, no real hospital branding, no people on screen.

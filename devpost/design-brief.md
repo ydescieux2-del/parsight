@@ -27,7 +27,7 @@ A supply tech or charge nurse is sweeping the clean supply room in gloves, often
 ## Product or overlay
 - Type: overlay. It responds to real shelves and real stock.
 - What the real version would sense: the items in each bin, to count them automatically (or tie into the hospital's existing par and requisition system).
-- Stand-in for the preview: no recognition. Staff count by hand with big plus and minus buttons on each card. The shelf is a virtual chrome wire shelving unit with translucent blue bins.
+- Stand-in for the preview: no recognition. Staff count by hand with big plus and minus buttons on each card. The shelf is a virtual chrome wire shelving unit with translucent blue bins, built in Blender at real size with printed generic labels (no brands). Source: tools/supply_shelf/.
 
 ## Where things live
 - Where the user is looking during the main task: at the front of the shelf unit, about a meter away, moving between shelves.
