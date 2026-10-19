@@ -8,11 +8,12 @@ import {expect} from "Leaf.lspkg/Utils/common/Expect"
 import {findSceneObjectByName, nextFrame, sleep} from "Leaf.lspkg/Utils/common/Utils"
 import {log, waitReady} from "./ShelfCountLeafHelpers"
 
-// Authored placement (observed in the runtime scene snapshot).
-const EXPECT: {[k: string]: {edge: string; pos: vec3}} = {
-  Flushes: {edge: "ShelfEdge_Top", pos: new vec3(0, -50, -89)},
-  IVStart: {edge: "ShelfEdge_Middle", pos: new vec3(0, -85, -89)},
-  Foley: {edge: "ShelfEdge_Bottom", pos: new vec3(0, -120, -89)},
+// Authored placement: each card straddles its shelf's front lip (1 cm below the deck), and the
+// lower cards tilt back toward the eye (tilt = rotation about X in degrees, negative = face up).
+const EXPECT: {[k: string]: {edge: string; pos: vec3; tilt: number}} = {
+  Flushes: {edge: "ShelfEdge_Top", pos: new vec3(0, -46, -89), tilt: 0},
+  IVStart: {edge: "ShelfEdge_Middle", pos: new vec3(0, -81, -89), tilt: -20},
+  Foley: {edge: "ShelfEdge_Bottom", pos: new vec3(0, -116, -89), tilt: -25},
 }
 const CARD_W = 16
 const CARD_H = 8.8
@@ -36,11 +37,16 @@ function checkCard(key: string, tag: string): void {
   // Card sits on (just in front of / below) its ShelfEdge.
   const edge = findSceneObjectByName(e.edge).getTransform().getWorldPosition()
   expect(p.distance(edge), `${tag} ${key} distance to ${e.edge}`).toBeLessThan(8)
+  // Card faces the viewer: its up axis is tilted back by exactly the authored angle.
+  const up = t.getWorldRotation().multiplyVec3(vec3.up())
+  const tiltDeg = Math.atan2(up.z, up.y) * 180 / Math.PI
+  expect(Math.abs(tiltDeg - e.tilt), `${tag} ${key} tilt ${tiltDeg.toFixed(1)} vs ${e.tilt}`).toBeLessThan(0.5)
+  // Real size, measured in the card's own plane so the tilt doesn't shrink it.
   const rmv = so.getComponent("Component.RenderMeshVisual") as RenderMeshVisual
   if (rmv) {
-    const mn = rmv.worldAabbMin(), mx = rmv.worldAabbMax()
-    expect(Math.abs(mx.x - mn.x - CARD_W), `${tag} ${key} width ${(mx.x - mn.x).toFixed(2)}`).toBeLessThan(0.5)
-    expect(Math.abs(mx.y - mn.y - CARD_H), `${tag} ${key} height ${(mx.y - mn.y).toFixed(2)}`).toBeLessThan(0.5)
+    const mn = rmv.localAabbMin(), mx = rmv.localAabbMax()
+    expect(Math.abs((mx.x - mn.x) * s.x - CARD_W), `${tag} ${key} width ${(mx.x - mn.x).toFixed(2)}`).toBeLessThan(0.5)
+    expect(Math.abs((mx.y - mn.y) * s.y - CARD_H), `${tag} ${key} height ${(mx.y - mn.y).toFixed(2)}`).toBeLessThan(0.5)
   }
 }
 
@@ -60,7 +66,7 @@ export class CardPlacementScenario extends Scenario {
       checkCard(k, `[${label}] t0`)
       const so = findSceneObjectByName("Card_" + k)
       const rmv = so.getComponent("Component.RenderMeshVisual") as RenderMeshVisual
-      const sz = rmv ? rmv.worldAabbMax().sub(rmv.worldAabbMin()) : vec3.zero()
+      const sz = rmv ? rmv.localAabbMax().sub(rmv.localAabbMin()) : vec3.zero()
       log(`[${label}] Card_${k} pos ${fmt(so.getTransform().getWorldPosition())} scale ${fmt(so.getTransform().getWorldScale())} size ${sz.x.toFixed(2)}x${sz.y.toFixed(2)}`)
     }
 

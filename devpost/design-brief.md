@@ -36,7 +36,7 @@ A supply tech or charge nurse is sweeping the clean supply room in gloves, often
   - Top shelf: Saline Flushes 10 mL, par 40. Starts at 26, with about 26 syringes visible.
   - Middle shelf: IV Start Kits, par 20. Starts at 20, full.
   - Bottom shelf: Foley Catheter Kits, par 8. Starts at 0, with empty bins.
-- Shelf cards: one per shelf, on the front edge of its shelf, centered, facing the user, at real size, about 16 x 9 cm. Each shows the item name, the count large, and the par as small text under it, like "26 of 40".
+- Shelf cards: one per shelf, on the front edge of its shelf like a bin label (straddling the shelf lip), centered, facing the user, at real size, about 16 x 9 cm. The middle and bottom cards tilt back 20 and 25 degrees so they face the eye when you look down. Each shows the item name, the count large, and the par under it, like "26 of 40". All text is sized to read from about 1 m.
 - Plus and minus buttons: two big equal buttons on each card, minus on the left, plus on the right, with a clear gap between them. About 5 x 5 cm each, with a 4 cm gap.
 - Control panel: a small panel on top of the shelf unit, at about chest height (about 1.3 m). Restocked to Par on the left, Pull List on the right.
 - Pull list: opens just above the control panel, facing the user.

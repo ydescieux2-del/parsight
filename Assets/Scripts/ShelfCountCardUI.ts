@@ -41,8 +41,9 @@ function applyTextRole(t: Text, role: TextRole, distanceCm: number = 110): void 
   ;(t as Text & {weight?: number}).weight = TYPE_SCALE[role].weight
 }
 
-const PAD = 1.0             // card inner padding (cm)
-const NAME_H = 1.5          // item-name row height (cm)
+const PAD = 1.0             // card side padding (cm)
+const PAD_Y = 0.65          // card top/bottom padding (cm), trimmed so the larger name row fits
+const NAME_H = 2.2          // item-name row height (cm), sized for HeadlineXL
 const ROW_GAP = 0.3         // name row → button row gap (cm)
 const CONTENT_Z = 0.6       // content lift over the BackPlate face (depth tie-break)
 const LAYOUT_Z_LIFT = 0.02
@@ -108,7 +109,7 @@ export class ShelfCountCardUI extends BaseScriptComponent {
   private pendingPar = 0
 
   get cardWidth(): number { return this.buttonSizeCm * 2 + this.buttonGapCm + PAD * 2 }
-  get cardHeight(): number { return PAD * 2 + NAME_H + ROW_GAP + this.buttonSizeCm }
+  get cardHeight(): number { return PAD_Y * 2 + NAME_H + ROW_GAP + this.buttonSizeCm }
   get currentVisualState(): CardVisualState { return this.visualState }
   get currentOpacity(): number { return this.focusOpacity }
 
@@ -163,15 +164,15 @@ export class ShelfCountCardUI extends BaseScriptComponent {
       col.alignItems = FlexAlign.Center
       col.justifyContent = FlexJustify.Start
       col.rowGap = ROW_GAP
-      col.paddingTop = PAD
-      col.paddingBottom = PAD
+      col.paddingTop = PAD_Y
+      col.paddingBottom = PAD_Y
       col.paddingLeft = PAD
       col.paddingRight = PAD
     })
 
     // Row 1: item name
     const nameObj = this.obj(content, "Name_" + key)
-    this.nameText = this.makeText(nameObj, this.itemName, "Subheadline", W - PAD * 2, NAME_H)
+    this.nameText = this.makeText(nameObj, this.itemName, "HeadlineXL", W - PAD * 2, NAME_H)
     const nameItem = nameObj.createComponent(FlexItem.getTypeName()) as FlexItem
     nameItem.overrideWidth = W - PAD * 2
     nameItem.overrideHeight = NAME_H
@@ -203,7 +204,7 @@ export class ShelfCountCardUI extends BaseScriptComponent {
     const midItem = midObj.createComponent(FlexItem.getTypeName()) as FlexItem
     midItem.overrideWidth = this.buttonGapCm
     midItem.overrideHeight = b
-    const countH = b * 0.62
+    const countH = b * 0.58
     const parH = b - countH
     mid.onInitialized.add(() => {
       mid.width = this.buttonGapCm
@@ -218,7 +219,7 @@ export class ShelfCountCardUI extends BaseScriptComponent {
     countItem.overrideWidth = this.buttonGapCm
     countItem.overrideHeight = countH
     const parObj = this.obj(midObj, "Par_" + key)
-    this.parText = this.makeText(parObj, this.pendingCount + " of " + this.pendingPar, "Caption", this.buttonGapCm, parH)
+    this.parText = this.makeText(parObj, this.pendingCount + " of " + this.pendingPar, "Headline2", this.buttonGapCm, parH)
     const parItem = parObj.createComponent(FlexItem.getTypeName()) as FlexItem
     parItem.overrideWidth = this.buttonGapCm
     parItem.overrideHeight = parH

@@ -18,11 +18,12 @@ import {FlexAlign, FlexDirection, FlexJustify} from "SpectaclesUIKit.lspkg/Scrip
 import Event, {PublicApi} from "SpectaclesInteractionKit.lspkg/Utils/Event"
 
 const FONT_SIZE_SCALE = 1.0
-type TextRole = "Headline2" | "Button" | "Body"
+type TextRole = "HeadlineXL" | "Label" | "ListBody"
+// ~1.5x the UIKit defaults so the list reads from ~1 m, matching the cards and control panel.
 const TYPE_SCALE: Record<TextRole, {size: number; weight: number}> = {
-  Headline2: {size: 48, weight: 700},
-  Button: {size: 39, weight: 500},
-  Body: {size: 39, weight: 500},
+  HeadlineXL: {size: 62, weight: 700},
+  Label: {size: 58, weight: 600},
+  ListBody: {size: 58, weight: 500},
 }
 function applyTextRole(t: Text, role: TextRole, distanceCm: number = 110): void {
   t.size = TYPE_SCALE[role].size * FONT_SIZE_SCALE * (distanceCm / 110)
@@ -38,8 +39,8 @@ const PAD = 1.2
 const CONTENT_Z = 0.6
 const LAYOUT_Z_LIFT = 0.02
 const BUTTON_LABEL_Z = 0.08
-const TITLE_H = 2.2
-const BODY_H = 5.6   // fits three lines at Body size
+const TITLE_H = 2.8
+const BODY_H = 8.4   // fits three lines at ListBody size
 const CLOSE_W = 9
 const CLOSE_H = 4
 const ROW_GAP = 0.6
@@ -61,7 +62,7 @@ export class ShelfCountReorderUI extends BaseScriptComponent {
   @input
   @hint("Panel width in cm; sized for 'Saline Flushes 10 mL, pull 40'")
   @widget(new SliderWidget(18, 40, 1))
-  panelWidthCm: number = 26
+  panelWidthCm: number = 32
   @ui.group_end
 
   private _onClose = new Event<void>()
@@ -140,11 +141,11 @@ export class ShelfCountReorderUI extends BaseScriptComponent {
     })
 
     const titleObj = this.obj(content, "ReorderTitle")
-    this.makeText(titleObj, this.title, "Headline2", innerW, TITLE_H)
+    this.makeText(titleObj, this.title, "HeadlineXL", innerW, TITLE_H)
     const titleItem = this.item(titleObj, innerW, TITLE_H)
 
     const bodyObj = this.obj(content, "ReorderText")
-    this.bodyText = this.makeText(bodyObj, this.pendingText, "Body", innerW, BODY_H)
+    this.bodyText = this.makeText(bodyObj, this.pendingText, "ListBody", innerW, BODY_H)
     const bodyItem = this.item(bodyObj, innerW, BODY_H)
 
     const closeObj = this.obj(content, "Btn_CloseReorder")
@@ -154,7 +155,7 @@ export class ShelfCountReorderUI extends BaseScriptComponent {
     btn.size = new vec3(CLOSE_W, CLOSE_H, 1)
     btn.onInitialized.add(() => { btn.size = new vec3(CLOSE_W, CLOSE_H, 1) })
     const labelObj = this.obj(closeObj, "Btn_CloseReorder_Label", new vec3(0, 0, BUTTON_LABEL_Z))
-    this.makeText(labelObj, this.closeLabel, "Button", CLOSE_W - 0.5, 2.4)
+    this.makeText(labelObj, this.closeLabel, "Label", CLOSE_W - 0.5, 3.2)
     const closeItem = this.item(closeObj, CLOSE_W, CLOSE_H)
     btn.onTriggerUp.add(() => this._onClose.invoke())
 

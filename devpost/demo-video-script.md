@@ -19,10 +19,10 @@ Stats in narration are the sourced ones from design-brief.md; keep wording as ca
 
 ## Shot notes
 - Record at the preview's default pose height (eye level about 1.5 m, 1 m from the shelf). Move with WASD/QE, look with right-drag.
-- Hide the LEAF result overlay text in the preview before recording (it shows "c4-card-placement PASSED" at top left).
+- Refresh the preview before recording; a LEAF test run leaves its result text at top left until refresh.
 - Start state must be 26 / 20 / 0. Refresh the preview before each take.
 - No patients, no real hospital branding, no people on screen.
 
 ## Open items before recording
-- Von's design notes from the walkthrough (see design-notes-2026-10-19.md) may change shots 4 to 6.
+- Walkthrough fixes are applied (design-notes-2026-10-19.md), so shots 4 to 8 show the final layout.
 - Recording method: screen-record the Preview panel, or build a rendered video from preview captures like the Till videos. Decide after design notes land.

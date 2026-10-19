@@ -53,5 +53,5 @@
     - '// @ui {"widget":"group_start", "label":"Settings"}'
     - '// @input string title = "Pull List" {"hint":"Panel title"}'
     - '// @input string closeLabel = "Close" {"hint":"Close button label"}'
-    - "// @input float panelWidthCm = 26 {\"hint\":\"Panel width in cm; sized for 'Saline Flushes 10 mL, pull 40'\", \"widget\":\"slider\", \"min\":18, \"max\":40, \"step\":1}"
+    - "// @input float panelWidthCm = 32 {\"hint\":\"Panel width in cm; sized for 'Saline Flushes 10 mL, pull 40'\", \"widget\":\"slider\", \"min\":18, \"max\":40, \"step\":1}"
     - '// @ui {"widget":"group_end"}'

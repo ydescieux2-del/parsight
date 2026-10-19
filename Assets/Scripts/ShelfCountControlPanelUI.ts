@@ -15,9 +15,10 @@ import {FlexAlign, FlexDirection, FlexJustify} from "SpectaclesUIKit.lspkg/Scrip
 import Event, {PublicApi} from "SpectaclesInteractionKit.lspkg/Utils/Event"
 
 const FONT_SIZE_SCALE = 1.0
-type TextRole = "Button" | "Body" | "Caption"
+type TextRole = "Button" | "Label" | "Body" | "Caption"
 const TYPE_SCALE: Record<TextRole, {size: number; weight: number}> = {
   Button: {size: 39, weight: 500},
+  Label: {size: 62, weight: 600},  // panel button labels, read from ~1 m
   Body: {size: 39, weight: 500},
   Caption: {size: 38, weight: 500},
 }
@@ -63,8 +64,8 @@ export class ShelfCountControlPanelUI extends BaseScriptComponent {
 
   onAwake() {
     const h = this.buttonHeightCm
-    const w1 = Math.max(8, this.startOfDayLabel.length * 0.55 + 2)
-    const w2 = Math.max(8, this.reorderLabel.length * 0.55 + 2)
+    const w1 = Math.max(8, this.startOfDayLabel.length * 0.9 + 2)
+    const w2 = Math.max(8, this.reorderLabel.length * 0.9 + 2)
     const gap = 2
     const W = w1 + w2 + gap + PAD * 2
     const H = h + PAD * 2
@@ -116,12 +117,12 @@ export class ShelfCountControlPanelUI extends BaseScriptComponent {
     const t = labelObj.createComponent("Component.Text") as Text
     t.text = label
     t.depthTest = true
-    applyTextRole(t, "Button")
+    applyTextRole(t, "Label")
     t.horizontalAlignment = HorizontalAlignment.Center
     t.verticalAlignment = VerticalAlignment.Center
     t.horizontalOverflow = HorizontalOverflow.Overflow
     t.verticalOverflow = VerticalOverflow.Overflow
-    t.layoutRect = Rect.create(-(w - 0.5) / 2, (w - 0.5) / 2, -1.2, 1.2)
+    t.layoutRect = Rect.create(-(w - 0.5) / 2, (w - 0.5) / 2, -1.8, 1.8)
     t.textFill.color = new vec4(1, 1, 1, 1)
     const item = so.createComponent(FlexItem.getTypeName()) as FlexItem
     item.overrideWidth = w
