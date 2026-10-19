@@ -679,6 +679,7 @@
     glowColor: true
     showAngleDeg: true
     distanceCm: true
+    pulseHz: true
   ScriptTypesDefault:
     {}
   ScriptInputs:
@@ -691,6 +692,7 @@
       distanceCm: !<float> 100.000000
       edgeXCm: !<float> 20.000000
       edgeYCm: !<float> 28.000000
+      pulseHz: 1.400000
   ScriptTypes:
     "":
       {}

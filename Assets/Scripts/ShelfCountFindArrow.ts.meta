@@ -35,6 +35,7 @@
     edgeYCm: false
     glowColor: false
     glowMaterial: false
+    pulseHz: false
     showAngleDeg: false
   ScriptTypesHidden:
     {}
@@ -53,6 +54,7 @@
       distanceCm: !<float> 100.000000
       edgeXCm: !<float> 24.000000
       edgeYCm: !<float> 15.000000
+      pulseHz: 1.400000
   ScriptTypes:
     -
       {}
@@ -67,3 +69,4 @@
     - '// @input float distanceCm = 100 {"hint":"How far ahead of the eyes the arrow floats (cm)"}'
     - '// @input float edgeXCm = 20 {"hint":"Horizontal reach toward the edge of the view (cm at that distance); keep inside the display"}'
     - '// @input float edgeYCm = 28 {"hint":"Vertical reach toward the edge of the view (cm at that distance); the display is taller than wide"}'
+    - '// @input float pulseHz = 1.4 {"hint":"Pulse rate of the arrow (beats per second)"}'

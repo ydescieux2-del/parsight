@@ -1,28 +1,25 @@
-# ParSight demo video script (draft 1)
+# ParSight demo video script (draft 2, brief v3)
 
-Target: 2:30, hard limit 3:00. Public on YouTube. Footage is the Lens Studio Interactive Preview.
-Look: light blue title/caption cards (navy #0f2240 header, #f8fafc surface, #2563eb accent).
-Voice: ElevenLabs narrator Brian (`nPczCjzI2devNBz1zQrb`). One voice only; no character voices.
-Stats in narration are the sourced ones from design-brief.md; keep wording as cautious as the brief.
+Target: about 2:15, hard limit 3:00. Public on YouTube. Footage is the Lens Studio preview.
+Look: light theme (navy #0f2240 header, #f8fafc / #f1f5f9 surfaces, blue #2563eb accent, cyan #22d3ee to match the bin glow).
+Voice: ElevenLabs narrator Brian (`nPczCjzI2devNBz1zQrb`), one voice.
+Layout: 1920 x 1080. Headline bar on top; demo scenes show two views side by side: "The supply room" (wide spectator camera, so viewers see which bins glow) and "Through the glasses" (the wearer's view). Von 2026-10-19: the close view alone was hard to follow.
+Renderer: ~/parsight-video/make_video.py (stills and short frame bursts captured from the preview, like the Till videos).
+Stats are the sourced ones from design-brief.md; keep the wording as cautious as the brief.
 
-| # | Time | Picture | Narration |
+| # | Picture | Caption | Narration |
 |---|---|---|---|
-| 1 | 0:00–0:12 | Title card: "ParSight. Par counts where the supplies are." Subtitle: Snap Specs, built in Lens Studio. | Every hospital floor has a clean supply room. Every bin in it has a par level. And every day, someone counts them by hand. |
-| 2 | 0:12–0:32 | Caption card with the three numbers, one at a time. | In one emergency department study, nurses left the room for supplies eight times a shift. Supplies are about fifteen percent of hospital spending. And the count is still a clipboard or a handheld scanner, in gloved hands. |
-| 3 | 0:32–0:45 | Preview, wide pose (Von 2026-10-19): camera at (0, 0, 161) looking at (0, -80, -89), whole unit with all three cards and the control panel in frame. Slow push in to eye level for shot 4. | ParSight puts the count on the shelf itself. This is a stand-in supply shelf: saline flushes, IV start kits, Foley catheter kits. |
-| 4 | 0:45–1:05 | Look at top shelf. Card brightens from dim. Close-up of "26 / 26 of 40", amber. | Each shelf has a label card at real size. It shows the count against par. Flushes are at twenty six of forty, so the card is amber. Cards you aren't looking at dim, so they stay findable without getting in the way. |
-| 5 | 1:05–1:25 | Pinch plus twice (26→28), minus once (28→27). Tones audible. | Stock goes in, pinch plus. Stock comes out, pinch minus. Nothing to touch, nothing to wipe down, and your eyes never leave the shelf. |
-| 6 | 1:25–1:40 | Look down to bottom shelf: red card, 0 of 8, empty bins. | Foley kits are at zero. The card turns red. |
-| 7 | 1:40–2:00 | Look up at control panel, pinch Pull List. List shows flushes and Foley with "pull N". | Pull List shows exactly what to bring up from central supply, and how many of each. |
-| 8 | 2:00–2:12 | Pinch Restocked to Par. All cards go back to the normal color. Pull List: "All at par". | After the restock, one pinch resets every shelf to par. |
-| 9 | 2:12–2:30 | Caption card: "Logic proven: 4 of 4 LEAF tests pass in preview." "Next: real item recognition, tie in to the hospital's par system." | All four behaviors are covered by automated LEAF tests in Lens Studio. Next comes counting the bins automatically, and connecting to the hospital's own par and requisition system. ParSight. |
+| 1 | Title card | ParSight. Find it. The count keeps itself. Snap Specs, built in Lens Studio. | It's three in the morning. A float nurse is covering a unit they've never worked on, and they need a Foley catheter kit, now. |
+| 2 | Problem card with the numbers | 8 trips a shift for supplies (ED study). Counting still done by hand. | In one emergency department study, nurses left the room for supplies eight times a shift. And the counting behind every supply room is still done by hand, with a clipboard or a scanner. |
+| 3 | Wide shot of the shelf (Von's wide pose), slow push in | A supply shelf, on Specs | ParSight runs on Snap Specs. On the left is the whole supply room. On the right is exactly what the nurse sees through the glasses. Saline flushes, IV start kits, and Foley kits, each with a par level. |
+| 4 | Find panel: pinch Saline Flush, then the three flush bins glow | Find it | Say what you need, or tap it. The three flush bins light up, right on the shelf, and their label glows, so there's nothing to hunt for. |
+| 5 | Reach marker on a flush bin; count goes 26 to 25 | The count keeps itself | Reach in and take one. That's it. The count drops from twenty six to twenty five, by itself. Nobody stops to scan, tap, or write anything down. |
+| 6 | Find Foley Kit. Looking away: the arrow pulses; turn to the shelf; empty bins glow, card says "Out of stock, on the Pull List" | Behind you? Follow the arrow | Now the Foley kit. The nurse is facing the wrong way, so an arrow at the edge of their view points back. They turn, and there are the lit bins. The shelf is empty, and ParSight says so. It's already on the pull list. |
+| 7 | Pull List: flushes pull 15, Foley pull 8. Restocked to Par: All at par | Restock without a sweep | The supply tech sees exactly what to bring up: fifteen flushes and eight Foley kits. After restocking, one pinch resets every shelf to par. |
+| 8 | Closing card | Logic proven: 7 LEAF tests pass in preview. Next: voice, camera confirmation, hospital pharmacy. | Every behavior here is covered by automated tests in Lens Studio. Next comes voice on the glasses, camera confirmation of each pick, and then the hospital pharmacy. ParSight. Find it, and the count keeps itself. |
 
 ## Shot notes
-- Open on the wide pose (shot 3), then work at eye level (about 1.5 m high, 1 m from the shelf) for shots 4 to 8. Move with WASD/QE, look with right-drag.
-- Refresh the preview before recording; a LEAF test run leaves its result text at top left until refresh.
-- Start state must be 26 / 20 / 0. Refresh the preview before each take.
-- No patients, no real hospital branding, no people on screen.
-
-## Open items before recording
-- Walkthrough fixes are applied (design-notes-2026-10-19.md), so shots 4 to 8 show the final layout.
-- Recording method: screen-record the Preview panel, or build a rendered video from preview captures like the Till videos. Decide after design notes land.
+- Refresh the preview before capturing so it starts at 26 / 20 / 0 and no LEAF result text is showing.
+- The preview does not draw the simulated hand, so scene 5 overlays a cyan "reach" marker on the bin in the edit. The take itself is real (the preview's simulated hand enters the bin and the count drops).
+- During capture the find timeout is raised to 60 s so the Foley highlight stays on while the frames are taken; it goes back to 20 s afterwards.
+- No patients, no real hospital or product branding, no people on screen.
