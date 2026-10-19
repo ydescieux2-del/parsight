@@ -10,7 +10,7 @@
     - !<own> 0bb760e2-90b7-4f36-8cd2-c6f729902cd7
     - !<own> f4fcf7af-7c38-4b67-8e36-777e5b8a0872
     - !<own> 7808080e-7530-4cb5-b99b-a4abd149f0a4
-    - !<own> 2748f02a-0a53-45e0-9778-9dfdada3b6ac
+    - !<own> fafa227d-6732-4c0a-979c-3d7c2046a92d
   layers: !<Layers/267ee9a7-aff2-4f9d-9a49-f71214747d03>
     userLayers:
       - id: 1
@@ -679,7 +679,6 @@
     glowColor: true
     showAngleDeg: true
     distanceCm: true
-    offsetCm: true
   ScriptTypesDefault:
     {}
   ScriptInputs:
@@ -690,7 +689,8 @@
       glowColor: !<Vec4> {x: 0.250000, y: 0.950000, z: 1.000000, w: 1.000000}
       showAngleDeg: !<float> 25.000000
       distanceCm: !<float> 100.000000
-      offsetCm: !<float> 13.000000
+      edgeXCm: !<float> 20.000000
+      edgeYCm: !<float> 28.000000
   ScriptTypes:
     "":
       {}
@@ -855,22 +855,6 @@
     - !<own> d9071294-12e8-425f-98f1-bf308a02639e
   Components:
     []
-- !<SceneObject/2748f02a-0a53-45e0-9778-9dfdada3b6ac>
-  PrefabRemaps:
-    []
-  Name: AiPreviewAgent Handler
-  Enabled: true
-  Layers: 1
-  LocalTransform: !<TransformEntity>
-    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
-    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
-    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
-    HasSegmentScaleCompensation: false
-  Children:
-    []
-  Components:
-    - !<own> aee03ba0-22ef-4560-95c1-891075124d53
-    - !<own> 62f54aa9-5e6a-4a0e-9abb-73ac5094c1a2
 - !<ScriptComponent/275aeb4d-77ac-4b1b-811e-907652542110>
   PrefabRemaps:
     []
@@ -1661,6 +1645,22 @@
   ScriptTypes:
     "":
       {}
+- !<ScriptComponent/6177fd44-a41e-446f-91d7-c6752f32119a>
+  PrefabRemaps:
+    []
+  Name: AgentInspectScript
+  Enabled: true
+  ScriptAsset: !<reference> 0b25079c-f5bf-4c6d-96c4-f43b89dfa213
+  ScriptInputsDefault:
+    {}
+  ScriptTypesDefault:
+    {}
+  ScriptInputs:
+    "":
+      {}
+  ScriptTypes:
+    "":
+      {}
 - !<RenderMeshVisual/6191ccec-a610-4a69-9c01-6e14aeaa94c7>
   PrefabRemaps:
     []
@@ -1702,22 +1702,6 @@
       initializePositionAndRotationFilter: true
       _touchpadScrollSpeed: !<float> 250.000000
       touchpadDragThreshold: 0.050000
-  ScriptTypes:
-    "":
-      {}
-- !<ScriptComponent/62f54aa9-5e6a-4a0e-9abb-73ac5094c1a2>
-  PrefabRemaps:
-    []
-  Name: AgentInteractScript
-  Enabled: true
-  ScriptAsset: !<reference> 29091811-e792-46be-bfa4-28ddec5f11be
-  ScriptInputsDefault:
-    {}
-  ScriptTypesDefault:
-    {}
-  ScriptInputs:
-    "":
-      {}
   ScriptTypes:
     "":
       {}
@@ -2118,6 +2102,22 @@
   BlendNormals: false
   BlendShapes:
     {}
+- !<ScriptComponent/7a63205d-0008-4158-9432-f6483d42c362>
+  PrefabRemaps:
+    []
+  Name: AgentInteractScript
+  Enabled: true
+  ScriptAsset: !<reference> 29091811-e792-46be-bfa4-28ddec5f11be
+  ScriptInputsDefault:
+    {}
+  ScriptTypesDefault:
+    {}
+  ScriptInputs:
+    "":
+      {}
+  ScriptTypes:
+    "":
+      {}
 - !<SceneObject/7a79b21d-1cd6-4bdb-a0cc-652a905abf20>
   PrefabRemaps:
     []
@@ -2709,22 +2709,6 @@
     []
   Components:
     - !<own> f1d0e79b-a820-4067-8793-04b8795249d1
-- !<ScriptComponent/aee03ba0-22ef-4560-95c1-891075124d53>
-  PrefabRemaps:
-    []
-  Name: AgentInspectScript
-  Enabled: true
-  ScriptAsset: !<reference> 0b25079c-f5bf-4c6d-96c4-f43b89dfa213
-  ScriptInputsDefault:
-    {}
-  ScriptTypesDefault:
-    {}
-  ScriptInputs:
-    "":
-      {}
-  ScriptTypes:
-    "":
-      {}
 - !<SceneObject/b0331923-6ed9-415f-a3d9-cd1e20b40e45>
   PrefabRemaps:
     []
@@ -3924,6 +3908,22 @@
     []
   Components:
     - !<own> 6191ccec-a610-4a69-9c01-6e14aeaa94c7
+- !<SceneObject/fafa227d-6732-4c0a-979c-3d7c2046a92d>
+  PrefabRemaps:
+    []
+  Name: AiPreviewAgent Handler
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    []
+  Components:
+    - !<own> 6177fd44-a41e-446f-91d7-c6752f32119a
+    - !<own> 7a63205d-0008-4158-9432-f6483d42c362
 - !<SceneObject/fc4e8a17-311f-42fc-be88-86fae32f38c6>
   PrefabRemaps:
     []

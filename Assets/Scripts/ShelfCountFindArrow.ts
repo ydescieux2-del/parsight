@@ -3,8 +3,9 @@
  * glowing arrowhead near the edge of the view points toward them (design brief).
  *
  * Each frame: if a target is set and the bins are more than showAngleDeg from the center of
- * view, place the arrowhead distanceCm ahead of the camera, offsetCm from center toward the bins,
- * rotated to point at them. Otherwise hide it.
+ * view, place the arrowhead distanceCm ahead of the camera, out near the edge of the display in
+ * the bins' direction (an ellipse edgeXCm x edgeYCm), rotated to point at them, so it never sits
+ * over what the user is looking at. Otherwise hide it.
  * Expects: cameraObject, displayCase (bins in its local space, see ShelfLayout).
  * Must not: decide the target; Main calls setTarget().
  */
@@ -40,8 +41,12 @@ export class ShelfCountFindArrow extends BaseScriptComponent {
   distanceCm: number = 100
 
   @input
-  @hint("How far from the view center, toward the bins, the arrow sits (cm at that distance)")
-  offsetCm: number = 13
+  @hint("Horizontal reach toward the edge of the view (cm at that distance); keep inside the display")
+  edgeXCm: number = 20
+
+  @input
+  @hint("Vertical reach toward the edge of the view (cm at that distance); the display is taller than wide")
+  edgeYCm: number = 28
 
   private arrow: SceneObject
   private targetKey: string | null = null
@@ -92,8 +97,8 @@ export class ShelfCountFindArrow extends BaseScriptComponent {
     this.dir2 = len > 1e-4 ? new vec2(dx / len, dy / len) : new vec2(0, -1)
     const t = this.arrow.getTransform()
     t.setWorldPosition(camPos.add(fwd.uniformScale(this.distanceCm))
-      .add(right.uniformScale(this.dir2.x * this.offsetCm))
-      .add(up.uniformScale(this.dir2.y * this.offsetCm)))
+      .add(right.uniformScale(this.dir2.x * this.edgeXCm))
+      .add(up.uniformScale(this.dir2.y * this.edgeYCm)))
     const spin = quat.angleAxis(Math.atan2(this.dir2.y, this.dir2.x), vec3.forward())
     t.setWorldRotation(cam.getWorldRotation().multiply(spin))
     this.setShowing(true)

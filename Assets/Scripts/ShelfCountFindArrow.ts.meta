@@ -31,9 +31,10 @@
     cameraObject: false
     displayCase: false
     distanceCm: false
+    edgeXCm: false
+    edgeYCm: false
     glowColor: false
     glowMaterial: false
-    offsetCm: false
     showAngleDeg: false
   ScriptTypesHidden:
     {}
@@ -50,7 +51,8 @@
       glowColor: !<Vec4> {x: 0.250000, y: 0.950000, z: 1.000000, w: 1.000000}
       showAngleDeg: !<float> 25.000000
       distanceCm: !<float> 100.000000
-      offsetCm: !<float> 13.000000
+      edgeXCm: !<float> 24.000000
+      edgeYCm: !<float> 15.000000
   ScriptTypes:
     -
       {}
@@ -63,4 +65,5 @@
     - '// @input vec4 glowColor = "{0.25,0.95,1.0,1.0}" {"widget":"color"}'
     - '// @input float showAngleDeg = 25 {"hint":"Show the arrow when the bins are farther than this from the view center (brief: 25)", "widget":"slider", "min":10, "max":45, "step":1}'
     - '// @input float distanceCm = 100 {"hint":"How far ahead of the eyes the arrow floats (cm)"}'
-    - '// @input float offsetCm = 13 {"hint":"How far from the view center, toward the bins, the arrow sits (cm at that distance)"}'
+    - '// @input float edgeXCm = 20 {"hint":"Horizontal reach toward the edge of the view (cm at that distance); keep inside the display"}'
+    - '// @input float edgeYCm = 28 {"hint":"Vertical reach toward the edge of the view (cm at that distance); the display is taller than wide"}'
