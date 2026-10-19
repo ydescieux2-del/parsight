@@ -7,7 +7,7 @@ shelf. If the bins are behind them, an arrow at the edge of their view points th
 reach in and take one, the shelf's count drops by itself. Low shelves turn amber, empty ones red,
 and the supply tech's Pull List already knows what to bring.
 
-Demo video: _(YouTube link)_ · Design brief: [`devpost/design-brief.md`](devpost/design-brief.md)
+Demo video: https://www.youtube.com/watch?v=CfPNbrQDyOc · Design brief: [`devpost/design-brief.md`](devpost/design-brief.md)
 
 ## Why glasses
 - The answer lights up the real bin, in front of you or behind you. A phone can only describe where it is.

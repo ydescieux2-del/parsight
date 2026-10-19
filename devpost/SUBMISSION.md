@@ -9,7 +9,7 @@ ParSight
 Snap Specs for hospital supply rooms: say what you need and its bins light up, an arrow points to bins behind you, and reaching in to take one updates the count by itself.
 
 ## Video
-https://www.youtube.com/watch?v=VIDEO_ID  (full youtube.com/watch form; public; reload the Devpost page to confirm it saved)
+https://www.youtube.com/watch?v=CfPNbrQDyOc  (paste this full form; reload the Devpost page to confirm it saved)
 
 ## Try it out
 https://github.com/ydescieux2-del/parsight
