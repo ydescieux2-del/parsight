@@ -1,7 +1,7 @@
 # Walkthrough notes, 2026-10-19 (Claude, from the preview)
 
 Viewed from the user's start position (eye level ~1.5 m, 1 m from the shelf), looking at each shelf in turn.
-Status: all 5 applied 2026-10-19 (Von chose "A"), plus the same text-size fix on the Pull List. All 4 LEAF tests re-run and PASS (c4 now also checks the tilt).
+Status: all 5 applied 2026-10-19, plus the same text-size fix on the Pull List. All 4 LEAF tests re-run and PASS (c4 now also checks the tilt).
 
 ## What works
 - The shelf reads as a hospital wire supply unit: chrome wire decks, blue bins, syringes standing in the top bins, kit pouches in the middle, overstock cases on the floor deck.
