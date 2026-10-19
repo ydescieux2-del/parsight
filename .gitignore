@@ -35,3 +35,7 @@ leaf_plugin_settings.json
 !Assets/GeneratedSFX/*.wav
 .virtual-scene.runtime.json
 __pycache__/
+
+# Internal session notes (repo is public for judging)
+MASTER_STATUS.md
+AGENT_LEARNINGS.md

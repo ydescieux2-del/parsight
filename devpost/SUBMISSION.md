@@ -30,14 +30,20 @@ Our first version of this Lens was a par counter with plus and minus buttons. It
 
 No patient data is involved. It finds and counts supplies only.
 
+## Why it belongs on glasses
+- **It draws in the world.** The answer lights up the real bin at real size, on the shelf where it belongs, instead of naming an aisle on a screen.
+- **It leaves your body free.** Gloved hands stay on the stock and eyes stay up; counting happens because your hand reached into a bin, not because you stopped to tap.
+- **It uses what you are facing.** When the item is behind you, the arrow appears because of where your head is pointed, and disappears when you turn. A phone can't do that.
+
 ## How we built it
 - **Lens Studio 5.24 for Specs**, TypeScript, Spectacles Interaction Kit for hands and pinches, and Spectacles UI Kit for the panels and shelf labels.
 - **Take detection** reads the interaction kit's fingertip positions every frame and tests them against each bin's space on the shelf.
 - **The arrow** compares where you are looking with where the bins are, and only appears when they are more than 25 degrees off center.
 - **The shelf and room** are real-scale models built with Python and Blender: a chrome wire unit with frosted bins, labeled flush syringes, IV start kit pouches, taped cases, and a clean supply room with a second shelf of exam gloves. All labels are generic, with no brands.
-- **Design first:** we wrote a design brief with five testable done criteria, then built to it.
-- **LEAF tests** prove each criterion in the Lens Studio preview: seven scenarios, all passing.
-- **Built with an AI agent:** Claude Code drove Lens Studio through its MCP tools (scene edits, preview camera, simulated hands, test runs), with design reviewed from the wearer's point of view after each pass.
+- **Planned with the Devpost Learn skill pack:** the `plan-lens` interview produced the first design brief (in `devpost/`, kept as v1). Each later version kept its format and judging checklist: a moment, who it's for, why glasses, where things live, hands and input, and five testable done criteria.
+- **Built with CLAD and the Lens Studio MCP:** Claude Code ran the CLAD plugin's skills (the Lens Studio router and preflight, Editor API, mesh building with Blender, LEAF test writing) and drove Lens Studio through the MCP: scene wiring, script compiles, preview camera moves, simulated hand pinches and reaches, captures, and test runs.
+- **LEAF tests** prove each done criterion in the Lens Studio preview: seven scenarios, all passing.
+- **Reviewed as the wearer:** after each pass we walked the preview at eye level, fixed what didn't read (text size, card placement, an arrow covering a panel), and re-ran the tests.
 
 ## Challenges we ran into
 - **The first idea was the wrong product.** A manual counter was easy to build and test, but nobody would want to wear glasses to tap plus and minus. Rethinking it around finding and automatic counting was the most important decision.
@@ -62,4 +68,4 @@ No patient data is involved. It finds and counts supplies only.
 - The hospital pharmacy and medication rooms, where finding the right item matters even more, with barcode confirmation of every pick.
 
 ## Built with
-lens-studio, snap-specs, spectacles-interaction-kit, spectacles-ui-kit, leaf, typescript, blender, python, claude-code, elevenlabs
+lens-studio, lens-studio-mcp, clad, snap-specs, spectacles-interaction-kit, spectacles-ui-kit, leaf, typescript, blender, python, claude-code, elevenlabs
