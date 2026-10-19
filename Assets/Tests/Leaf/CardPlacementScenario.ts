@@ -1,4 +1,4 @@
-// Done criterion 4: cards stay on their shelf edges at real size while the viewer moves.
+// Done criterion 5: cards stay on their shelf edges at real size while the viewer moves.
 // Samples card transforms every frame for sample_ms while recording the camera pose.
 // Run once per preview-camera position (camera is moved externally via MovePreviewCamera);
 // min_camera_poses > 1 makes the scenario wait for that many distinct camera poses during sampling.

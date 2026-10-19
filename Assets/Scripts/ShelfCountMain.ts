@@ -1,23 +1,31 @@
 /**
  * ShelfCountMain — orchestrator and single owner of shelf-count state.
  *
- * Owns: ShelfCountState (counts/par), reorder-list visibility + 15 s auto-hide timer.
- * Expects (wired in the scene): three ShelfCountCardUI cards, the control panel, the reorder
- * panel, the audio controller and the gaze controller.
- * Flow: card onPlus/onMinus → state → card.setCount + tone; control panel Restocked to Par /
- * Pull List → state / pull-list panel; Close or timeout → hide.
+ * Owns: ShelfCountState (counts/par), reorder-list visibility + 15 s auto-hide timer, and the
+ * find state (which item is being found) + its 20 s timeout.
+ * Expects (wired in the scene): three ShelfCountCardUI cards, the supply (control) panel, the
+ * reorder panel, the audio controller, the gaze controller, and for finding: the find panel,
+ * bin highlight, arrow and take detector.
+ * Flow: card onPlus/onMinus → state → card.setCount + tone; supply panel Restocked to Par /
+ * Pull List → state / pull-list panel; Close or timeout → hide. Find panel → highlight bins +
+ * card + arrow; a detected take → count − 1 and clears that item's highlight.
  * Must not: build UI or text (UI modules do that).
  *
  * Public state API (for LEAF / other scripts), keys = "Flushes" | "IVStart" | "Foley":
  *   getCount(key), getPar(key), getCardState(key) → "normal" | "amber" | "red",
  *   getCardOpacity(key), getReorderText(), isReorderVisible(), getStateJson(),
- *   plus(key), minus(key), startOfDay(), openReorder(), closeReorder()
+ *   plus(key), minus(key), startOfDay(), openReorder(), closeReorder(),
+ *   find(key), clearFind(), take(key), getFoundKey()
  */
 import {ShelfCountAudioController} from "./ShelfCountAudioController"
 import {ShelfCountCardUI} from "./ShelfCountCardUI"
 import {ShelfCountControlPanelUI} from "./ShelfCountControlPanelUI"
+import {ShelfCountFindArrow} from "./ShelfCountFindArrow"
+import {ShelfCountFindHighlight} from "./ShelfCountFindHighlight"
+import {ShelfCountFindPanelUI} from "./ShelfCountFindPanelUI"
 import {ShelfCountGazeController} from "./ShelfCountGazeController"
 import {ShelfCountReorderUI} from "./ShelfCountReorderUI"
+import {ShelfCountTakeDetector} from "./ShelfCountTakeDetector"
 import {CardState, ShelfCountState} from "./ShelfCountState"
 
 // Par levels are fixed for this Lens (design brief: "Par is fixed at 40, 20 and 8").
@@ -56,6 +64,22 @@ export class ShelfCountMain extends BaseScriptComponent {
   @input
   @hint("Dims cards outside the view center")
   gaze: ShelfCountGazeController
+
+  @input
+  @hint("Find panel on top of the shelf (stands in for voice)")
+  findPanel: ShelfCountFindPanelUI
+
+  @input
+  @hint("Glowing outlines around the found item's bins")
+  findHighlight: ShelfCountFindHighlight
+
+  @input
+  @hint("Arrow toward the found bins when they are out of view")
+  findArrow: ShelfCountFindArrow
+
+  @input
+  @hint("Counts a take when a hand reaches into a bin and back out")
+  takeDetector: ShelfCountTakeDetector
   @ui.group_end
 
   @ui.separator
@@ -82,6 +106,11 @@ export class ShelfCountMain extends BaseScriptComponent {
   reorderAutoHideSeconds: number = 15
 
   @input
+  @hint("Seconds before a find highlight clears by itself (brief: 20)")
+  @widget(new SliderWidget(5, 60, 1))
+  findTimeoutSeconds: number = 20
+
+  @input
   @hint("Pull list text when nothing is under par")
   allStockedText: string = "All at par"
   @ui.group_end
@@ -90,10 +119,14 @@ export class ShelfCountMain extends BaseScriptComponent {
   private cards: {[key: string]: ShelfCountCardUI} = {}
   private reorderVisible = false
   private hideTimer: DelayedCallbackEvent
+  private findTimer: DelayedCallbackEvent
+  private foundKey: string | null = null
 
   onAwake() {
     this.hideTimer = this.createEvent("DelayedCallbackEvent")
     this.hideTimer.bind(() => this.closeReorder())
+    this.findTimer = this.createEvent("DelayedCallbackEvent")
+    this.findTimer.bind(() => this.clearFind())
     // Wire in OnStart: sibling/child script components are guaranteed awake by then.
     this.createEvent("OnStartEvent").bind(() => this.init())
   }
@@ -119,6 +152,8 @@ export class ShelfCountMain extends BaseScriptComponent {
     this.controlPanel.onReorder.add(() => this.openReorder())
     this.reorderPanel.onClose.add(() => this.closeReorder())
     if (this.gaze) this.gaze.setCards([top, mid, bot])
+    if (this.findPanel) this.findPanel.onFind.add((key) => this.find(key))
+    if (this.takeDetector) this.takeDetector.onTake.add((key) => this.take(key))
 
     this.refreshAll()
     print("[ShelfCountMain] ready " + this.getStateJson())
@@ -138,6 +173,25 @@ export class ShelfCountMain extends BaseScriptComponent {
     this.state.decrement(key)
     if (this.audio) this.audio.playMinus()
     this.refresh(key)
+  }
+
+  /** Find an item: light its bins and card. Finding the item already lit turns it off. */
+  find(key: string): void {
+    if (!this.state || !this.cards[key]) return
+    if (this.foundKey === key) return this.clearFind()
+    this.setFound(key)
+    this.findTimer.reset(this.findTimeoutSeconds)
+  }
+
+  clearFind(): void {
+    this.setFound(null)
+  }
+
+  /** A hand took one item from this shelf. Empty shelf: nothing happens. */
+  take(key: string): void {
+    if (!this.state || this.state.count(key) <= 0) return
+    this.minus(key)
+    if (this.foundKey === key) this.clearFind()
   }
 
   startOfDay(): void {
@@ -164,6 +218,7 @@ export class ShelfCountMain extends BaseScriptComponent {
   getCardState(key: string): CardState { return this.state ? this.state.cardState(key) : "normal" }
   getReorderText(): string { return this.state ? this.state.reorderText(this.allStockedText) : "" }
   isReorderVisible(): boolean { return this.reorderVisible }
+  getFoundKey(): string | null { return this.foundKey }
   /** Gaze focus opacity of a card: 1 = looked at, ~0.3 = dimmed. */
   getCardOpacity(key: string): number { return this.cards[key] ? this.cards[key].currentOpacity : -1 }
   getShelfKeys(): string[] { return this.state ? this.state.keys : [] }
@@ -183,6 +238,7 @@ export class ShelfCountMain extends BaseScriptComponent {
       cardOpacity,
       reorderText: this.getReorderText(),
       reorderVisible: this.reorderVisible,
+      foundKey: this.foundKey,
     })
   }
 
@@ -191,6 +247,15 @@ export class ShelfCountMain extends BaseScriptComponent {
     const card = this.cards[key]
     if (card) card.setCount(this.state.count(key), this.state.par(key), this.state.cardState(key))
     if (this.reorderVisible) this.reorderPanel.setText(this.getReorderText())
+  }
+
+  private setFound(key: string | null): void {
+    this.foundKey = key
+    for (const k of Object.keys(this.cards)) this.cards[k].setFound(k === key)
+    if (this.findHighlight) this.findHighlight.show(key)
+    if (this.findArrow) this.findArrow.setTarget(key)
+    if (this.findPanel) this.findPanel.setActive(key)
+    if (this.gaze) this.gaze.setPinned(key ? this.cards[key] : null)
   }
 
   private refreshAll(): void {

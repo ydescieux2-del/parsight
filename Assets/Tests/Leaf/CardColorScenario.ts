@@ -1,4 +1,4 @@
-// Done criterion 2: card amber below par, red at zero, normal at/above par (state + rendered color).
+// Done criterion 4 (part a): card amber below par, red at zero, normal at/above par (state + rendered color).
 import {Scenario} from "Leaf.lspkg/Scenarios/scenario/Scenario"
 import {expect} from "Leaf.lspkg/Utils/common/Expect"
 import {findSceneObjectByName, sleep} from "Leaf.lspkg/Utils/common/Utils"

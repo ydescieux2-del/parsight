@@ -1,4 +1,4 @@
-// Done criterion 1: pinching plus adds one, minus takes one away; never below 0; tones counted.
+// Corrections (brief: plus and minus stay on each card): pinching plus adds one, minus takes one away; never below 0; tones counted.
 import {Scenario} from "Leaf.lspkg/Scenarios/scenario/Scenario"
 import {expect} from "Leaf.lspkg/Utils/common/Expect"
 import {sleep} from "Leaf.lspkg/Utils/common/Utils"

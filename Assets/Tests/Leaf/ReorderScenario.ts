@@ -1,4 +1,4 @@
-// Done criterion 3: Reorder lists every shelf under par with how many to order, or "All at par".
+// Done criterion 4 (part b): Pull List lists every shelf under par with how many to order, or "All at par".
 import {Scenario} from "Leaf.lspkg/Scenarios/scenario/Scenario"
 import {ScenarioConfig} from "Leaf.lspkg/Scenarios/scenario/ScenarioConfig"
 import {expect} from "Leaf.lspkg/Utils/common/Expect"

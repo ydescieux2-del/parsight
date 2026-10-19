@@ -2,7 +2,7 @@
  * ShelfCountCardUI — one shelf card (UIKit BackPlate + FlexLayout + two UIKit Buttons).
  *
  * Owns: the card's visuals only (name, big count, "8 of 12" par line, minus/plus buttons,
- * background tint for normal/amber/red, focus dimming).
+ * background tint for normal/amber/red, focus dimming, and the glowing border while found).
  * Expects: mounted on an authored SceneObject named "Card_<shelfKey>" on the front edge of
  * its shelf. Runtime children are named for LEAF: "Btn_Minus_<key>", "Btn_Plus_<key>",
  * "Count_<key>", "Par_<key>", "Name_<key>".
@@ -50,6 +50,9 @@ const LAYOUT_Z_LIFT = 0.02
 const BUTTON_LABEL_Z = 0.08 // label lift over the Button face
 
 export type CardVisualState = "normal" | "amber" | "red"
+
+const FOUND_BORDER = new vec4(0.45, 1.0, 1.0, 1)  // matches the bin glow
+const OUT_OF_STOCK_TEXT = "Out of stock, on the Pull List"
 
 @component
 export class ShelfCountCardUI extends BaseScriptComponent {
@@ -107,11 +110,13 @@ export class ShelfCountCardUI extends BaseScriptComponent {
   private focusOpacity = 1
   private pendingCount = 0
   private pendingPar = 0
+  private found = false
 
   get cardWidth(): number { return this.buttonSizeCm * 2 + this.buttonGapCm + PAD * 2 }
   get cardHeight(): number { return PAD_Y * 2 + NAME_H + ROW_GAP + this.buttonSizeCm }
   get currentVisualState(): CardVisualState { return this.visualState }
   get currentOpacity(): number { return this.focusOpacity }
+  get isFound(): boolean { return this.found }
 
   onAwake() {
     this.buildCard()
@@ -124,6 +129,12 @@ export class ShelfCountCardUI extends BaseScriptComponent {
     this.visualState = state
     if (this.countText) this.countText.text = "" + count
     if (this.parText) this.parText.text = count + " of " + par
+    this.applyColors()
+  }
+
+  /** Main → card: this item is being found. Glows the border; at zero, says it's out of stock. */
+  setFound(found: boolean): void {
+    this.found = found
     this.applyColors()
   }
 
@@ -274,12 +285,18 @@ export class ShelfCountCardUI extends BaseScriptComponent {
       : this.visualState === "amber" ? this.amberColor : this.normalColor
     if (this.rect) {
       this.rect.backgroundColor = new vec4(base.x, base.y, base.z, base.w)
-      this.rect.borderColor = new vec4(
+      this.rect.borderColor = this.found ? FOUND_BORDER : new vec4(
         Math.min(1, base.x + 0.35), Math.min(1, base.y + 0.35), Math.min(1, base.z + 0.35), 1)
+      this.rect.borderSize = this.found ? 0.45 : 0.12
       this.rect.opacity = a
     }
     const white = new vec4(1, 1, 1, a)
-    if (this.nameText) this.nameText.textFill.color = white
+    if (this.nameText) {
+      const outOfStock = this.found && this.pendingCount === 0
+      this.nameText.text = outOfStock ? OUT_OF_STOCK_TEXT : this.itemName
+      applyTextRole(this.nameText, outOfStock ? "Headline2" : "HeadlineXL")
+      this.nameText.textFill.color = white
+    }
     if (this.countText) this.countText.textFill.color = white
     if (this.parText) this.parText.textFill.color = new vec4(1, 1, 1, 0.85 * a)
     if (this.minusBtn && this.minusBtn.initialized) this.minusBtn.opacity = a

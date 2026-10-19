@@ -34,12 +34,17 @@
     cardMiddle: false
     cardTop: false
     controlPanel: false
+    findArrow: false
+    findHighlight: false
+    findPanel: false
+    findTimeoutSeconds: false
     gaze: false
     reorderAutoHideSeconds: false
     reorderPanel: false
     startCountBottom: false
     startCountMiddle: false
     startCountTop: false
+    takeDetector: false
   ScriptTypesHidden:
     {}
   ReadMe: !<reference> 00000000-0000-0000-0000-000000000000
@@ -56,10 +61,15 @@
       reorderPanel: !<MappingBased.AssignableType_5> 00000000-0000-0000-0000-000000000000
       audio: !<MappingBased.AssignableType_6> 00000000-0000-0000-0000-000000000000
       gaze: !<MappingBased.AssignableType_7> 00000000-0000-0000-0000-000000000000
+      findPanel: !<MappingBased.AssignableType_8> 00000000-0000-0000-0000-000000000000
+      findHighlight: !<MappingBased.AssignableType_9> 00000000-0000-0000-0000-000000000000
+      findArrow: !<MappingBased.AssignableType_10> 00000000-0000-0000-0000-000000000000
+      takeDetector: !<MappingBased.AssignableType_11> 00000000-0000-0000-0000-000000000000
       startCountTop: !<float> 8.000000
       startCountMiddle: !<float> 10.000000
       startCountBottom: !<float> 0.000000
       reorderAutoHideSeconds: !<float> 15.000000
+      findTimeoutSeconds: !<float> 20.000000
       allStockedText: All stocked
   ScriptTypes:
     -
@@ -76,6 +86,10 @@
     - '// @input AssignableType_5 reorderPanel {"hint":"Pull list panel above the control panel"}'
     - '// @input AssignableType_6 audio {"hint":"Plays the plus/minus tones"}'
     - '// @input AssignableType_7 gaze {"hint":"Dims cards outside the view center"}'
+    - '// @input AssignableType_8 findPanel {"hint":"Find panel on top of the shelf (stands in for voice)"}'
+    - "// @input AssignableType_9 findHighlight {\"hint\":\"Glowing outlines around the found item's bins\"}"
+    - '// @input AssignableType_10 findArrow {"hint":"Arrow toward the found bins when they are out of view"}'
+    - '// @input AssignableType_11 takeDetector {"hint":"Counts a take when a hand reaches into a bin and back out"}'
     - '// @ui {"widget":"group_end"}'
     - '// @ui {"widget":"separator"}'
     - '// @ui {"widget":"label", "label":"<span style=\"color: #60A5FA;\">Settings</span>"}'
@@ -84,5 +98,6 @@
     - '// @input float startCountMiddle = 20 {"hint":"Starting count on the middle shelf (default: 20, at par)", "widget":"slider", "min":0, "max":60, "step":1}'
     - '// @input float startCountBottom {"hint":"Starting count on the bottom shelf (default: 0, empty)", "widget":"slider", "min":0, "max":60, "step":1}'
     - '// @input float reorderAutoHideSeconds = 15 {"hint":"Seconds before the pull list hides by itself", "widget":"slider", "min":3, "max":60, "step":1}'
+    - '// @input float findTimeoutSeconds = 20 {"hint":"Seconds before a find highlight clears by itself (brief: 20)", "widget":"slider", "min":5, "max":60, "step":1}'
     - '// @input string allStockedText = "All at par" {"hint":"Pull list text when nothing is under par"}'
     - '// @ui {"widget":"group_end"}'

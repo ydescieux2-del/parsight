@@ -5,6 +5,9 @@ import {findSceneObjectByName, sleep} from "Leaf.lspkg/Utils/common/Utils"
 import {ShelfCountMain} from "../../Scripts/ShelfCountMain"
 import {ShelfCountAudioController} from "../../Scripts/ShelfCountAudioController"
 import {ShelfCountCardUI} from "../../Scripts/ShelfCountCardUI"
+import {ShelfCountFindArrow} from "../../Scripts/ShelfCountFindArrow"
+import {ShelfCountFindHighlight} from "../../Scripts/ShelfCountFindHighlight"
+import {ShelfCountTakeDetector} from "../../Scripts/ShelfCountTakeDetector"
 
 export const KEYS = ["Flushes", "IVStart", "Foley"]
 
@@ -61,4 +64,36 @@ export async function click(interactor: DefaultLeafInteractor, name: string): Pr
   await interactor.trigger(target)
   await sleep(250)
   log("clicked " + name)
+}
+
+export function getHighlight(): ShelfCountFindHighlight {
+  const so = findSceneObjectByName("FindHighlight")
+  if (!so) throw new Error("FindHighlight not found")
+  return so.getComponent(ShelfCountFindHighlight.getTypeName()) as ShelfCountFindHighlight
+}
+
+export function getArrow(): ShelfCountFindArrow {
+  const so = findSceneObjectByName("FindArrow")
+  if (!so) throw new Error("FindArrow not found")
+  return so.getComponent(ShelfCountFindArrow.getTypeName()) as ShelfCountFindArrow
+}
+
+export function getDetector(): ShelfCountTakeDetector {
+  const so = findSceneObjectByName("TakeDetector")
+  if (!so) throw new Error("TakeDetector not found")
+  return so.getComponent(ShelfCountTakeDetector.getTypeName()) as ShelfCountTakeDetector
+}
+
+/** DisplayCase-local cm -> world (bins are defined in DisplayCase space). */
+export function caseToWorld(local: vec3): vec3 {
+  const so = findSceneObjectByName("DisplayCase")
+  if (!so) throw new Error("DisplayCase not found")
+  return so.getTransform().getWorldTransform().multiplyPoint(local)
+}
+
+/** Is the outline object for this shelf currently shown. */
+export function highlightOn(key: string): boolean {
+  const so = findSceneObjectByName("Highlight_" + key)
+  if (!so) throw new Error("Highlight_" + key + " not found")
+  return so.enabled
 }

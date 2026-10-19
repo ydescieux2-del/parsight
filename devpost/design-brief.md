@@ -4,89 +4,98 @@ status: approved
 
 # Design brief: ParSight
 
-<!-- Revised 2026-10-17 from the original bakery version (Shelf Count, kept in design-brief-bakery-v1.md). Same mechanics, retargeted to hospital clean supply rooms. Values marked (default) were not chosen by the learner. -->
+<!-- v3, 2026-10-19: pivot from "count by pinching" to "find it, and the count keeps itself". v2 (manual par counter) is in git history (commit 49f6ec9); the bakery v1 is in design-brief-bakery-v1.md. Values marked (default) were not chosen by the learner. -->
 
 ## The one spatial moment
-A supply tech or charge nurse is sweeping the clean supply room in gloves, often carrying stock. They look at the supply shelf and see a small label card on the front edge of each shelf showing how many items are left against par. A quick pinch on plus or minus updates the count, and the card turns amber below par and red at zero, so they know what to pull from central supply without putting anything down to use a scanner or clipboard.
+A float nurse is in a clean supply room they have never worked in, gloved, and needs a Foley catheter kit now. They tap "Foley Kit" on the Find panel on top of the shelf (on glasses, they would just say it). The right bins light up on the shelf, and if they are out of view, an arrow at the edge of their vision points the way. They reach in and take one, and the count for that shelf drops by itself. Nobody counts, and nobody hunts. When a shelf runs low its label turns amber, then red, and the supply tech's Pull List already knows what to bring.
 
 ## Who it's for
-- Hospital supply chain and nursing teams. "Par level" is how hospital supply rooms already work: each bin has a par, and staff count and restock to it every day.
+- **Nurses, especially float and travel nurses**, who lose time searching for supplies in rooms they don't know. Searching is the biggest part of the "time lost to supplies" problem below.
+- **Supply techs**, who restock to par every day and today walk the room with a handheld scanner to find out what is short.
 - Why it matters:
   - In an emergency department study, nurses left the room for supplies 8 times per shift before point-of-use storage, and 2.5 times after ([Richardson et al. 2014](https://healthdesign.org/system/files/Richardson_Rupp_Long_Urquhart_Ricart_Newcomb_Myers_Kane-2014-CHD-KPS.pdf)).
   - Earlier studies, as cited by vendors, put lost time at up to about 40 minutes per shift, mostly hunting for items (Hendrich 2008). They also found 14% of nurse time spent working around missing supplies (Tucker 2014) ([summary](https://www.tersosolutions.com/updates/frustrations-of-manual-inventory-management-a-nurses-perspective)).
   - Supplies are about 15% of hospital expenses on average, and 30 to 40% in surgery-heavy hospitals ([SAGE 2017](https://journals.sagepub.com/doi/10.1177/1077558717719928)).
-- No patient data is involved. It counts supplies only.
+- No patient data is involved. It finds and counts supplies only.
+- **Next market: hospital pharmacy and medication rooms.** "Find it" matters even more there (look-alike, sound-alike drugs), but it needs barcode or camera confirmation of every pick, and controlled substances already live in counting cabinets. The stock room proves the idea first.
 
 ## Why it belongs on glasses
-- Uses: draws in the world (each count sits on the shelf it describes), leaves your body free (eyes stay on the shelf, gloved hands stay on the stock).
-- Why it's better than the phone or handheld scanner version:
-  - Gloved, often contaminated hands can't easily work a phone or scanner.
-  - Infection control discourages touching shared screens, and a mid-air pinch touches nothing.
-  - There's no list to match against shelves: the count sits on the shelf you're already looking at.
+- Uses: draws in the world (the answer lights up the actual bin), leaves your body free (eyes up, gloved hands on the stock), knows what your hands are doing (reaching into a bin counts as taking).
+- Why a phone or scanner can't do this:
+  - A phone can tell you "aisle 2, shelf 3". It can't light up the bin in front of you or point to it when it's behind you.
+  - Counting happens as a side effect of taking an item. Nobody stops to scan, tap, or write.
+  - Gloved, often contaminated hands can't easily work a phone or scanner, and a mid-air pinch touches nothing.
 
 ## Product or overlay
 - Type: overlay. It responds to real shelves and real stock.
-- What the real version would sense: the items in each bin, to count them automatically (or tie into the hospital's existing par and requisition system).
-- Stand-in for the preview: no recognition. Staff count by hand with big plus and minus buttons on each card. The shelf is a virtual chrome wire shelving unit with translucent blue bins, built in Blender at real size with printed generic labels (no brands). Source: tools/supply_shelf/.
+- What the real version would sense: the user's voice ("Foley sixteen French"), hand position against each bin's known space (take detection), and later the camera recognizing the item taken.
+- Stand-in for the preview:
+  - Find by tapping an item on the Find panel instead of voice.
+  - Take detection uses the hand position from Spectacles Interaction Kit against each bin's space, so it works with the preview's simulated hands.
+  - The shelf is a virtual chrome wire shelving unit with translucent blue bins, built in Blender at real size with printed generic labels (no brands). Source: tools/supply_shelf/.
 
 ## Where things live
 - Where the user is looking during the main task: at the front of the shelf unit, about a meter away, moving between shelves.
 - Shelf unit: a chrome wire shelving unit about 1.2 m wide, 1.3 m tall and 0.5 m deep, standing on the floor about 1 m in front of the user at start. Shelves at about 35 cm, 70 cm and 105 cm, plus a floor deck holding sealed overstock cases.
-- Shelf contents (simple 3D stand-ins in blue bins):
-  - Top shelf: Saline Flushes 10 mL, par 40. Starts at 26, with about 26 syringes visible.
+- Shelf contents (three bins per shelf, one item per shelf):
+  - Top shelf: Saline Flushes 10 mL, par 40. Starts at 26, with 26 syringes visible.
   - Middle shelf: IV Start Kits, par 20. Starts at 20, full.
   - Bottom shelf: Foley Catheter Kits, par 8. Starts at 0, with empty bins.
-- Shelf cards: one per shelf, on the front edge of its shelf like a bin label (straddling the shelf lip), centered, facing the user, at real size, about 16 x 9 cm. The middle and bottom cards tilt back 20 and 25 degrees so they face the eye when you look down. Each shows the item name, the count large, and the par under it, like "26 of 40". All text is sized to read from about 1 m.
-- Plus and minus buttons: two big equal buttons on each card, minus on the left, plus on the right, with a clear gap between them. About 5 x 5 cm each, with a 4 cm gap.
-- Control panel: a small panel on top of the shelf unit, at about chest height (about 1.3 m). Restocked to Par on the left, Pull List on the right.
-- Pull list: opens just above the control panel, facing the user.
+- Shelf cards: one per shelf, on the front edge of its shelf like a bin label, centered, at real size, about 16 x 9 cm. Middle and bottom cards tilt back 20 and 25 degrees toward the eye. Each shows the item name, the count large, and "26 of 40" under it. Plus and minus buttons stay on each card for corrections (about 5 x 5 cm, 4 cm gap).
+- Find panel: on top of the shelf unit, centered, at about chest height (about 1.3 m). Three big buttons, one per item: "Saline Flush", "IV Start Kit", "Foley Kit".
+- Supply panel (for the supply tech): on top of the unit, to the right of the Find panel. Restocked to Par and Pull List.
+- Pull list: opens just above the supply panel, facing the user.
+- Bin highlight: a bright outline around each bin of the found item, plus that shelf's card glowing.
+- Arrow: when the found bins are out of view, a small arrow near the edge of the view, about 1 m ahead, pointing toward them (default).
 
 ## Hands and input
-- Add one: pinch the plus button on a shelf card. Plays a short higher tone.
-- Take one away (used or pulled): pinch the minus button. Plays a short lower tone.
-- Pinching the card itself does nothing, so a near miss never counts.
-- The count never goes below 0, and a minus at 0 is silent. It can go above par.
-- Restocked to Par: pinch the button on the control panel. Sets every shelf to full par: 40, 20 and 8.
-- Pull List: pinch the button on the control panel. Opens the pull list.
-- Close: pinch the Close button on the pull list.
+- Find: pinch an item on the Find panel. Its bins and card light up. Pinching another item switches. Pinching the same item again clears it.
+- Take: a hand reaches into a bin (stays inside at least 0.3 s) and comes back out. That shelf's count drops by one, with the short lower tone. A hand passing in front of a bin without entering it does nothing. A take also clears the find highlight for that item.
+- Correct: plus and minus on the card, as before. Plus undoes a wrong take.
+- The count never goes below 0. A take from an empty shelf does nothing.
+- Restocked to Par and Pull List: as before, on the supply panel.
 - Par is fixed at 40, 20 and 8 for this Lens.
 - Targets are big and highlight when aimed at. All panels and buttons are light (outlined buttons on light plates), because dark UI disappears on the additive display.
-- Voice: none.
+- Voice: on glasses, "find <item>". In the preview, the Find panel stands in for it (default).
 
 ## When things show
-- Shelf cards: always present on their shelf edges. Full brightness when the user looks at that shelf, and dimmed to a faint outline (about 30 percent) when they look away, so they can still find the cards. "Looking at" means the card is within about 15 degrees of the center of view (default).
+- Shelf cards: always present. Full brightness when looked at (within about 15 degrees of the center of view), dimmed to about 30 percent otherwise. A found item's card stays at full brightness.
 - Card color: normal (light slate) at or above par, amber below par, red at zero.
-- Pull list: shows when Pull List is pressed. It lists each shelf under par and how many to pull to get back to par, like "Saline Flushes 10 mL, pull 14". If nothing is under par it says "All at par". It hides when Close is pressed, or by itself after 15 seconds.
-- If something needs attention out of view: nothing extra. The cards dim instead of disappearing, so they stay findable.
+- Found an item that is out of stock (count 0): its bins still light up, and the card shows "Out of stock, on the Pull List".
+- Highlight: stays until the item is taken, the same Find button is pinched again, or 20 seconds pass (default).
+- Arrow: shows only while a highlight is active and the found bins are more than about 25 degrees from the center of view (default). Hides as soon as they come into view.
+- Pull list: lists each shelf under par and how many to pull, like "Saline Flushes 10 mL, pull 14", or "All at par". Hides on Close or after 15 seconds.
 
 ## Done criteria
 Each one can be checked in Lens Studio's preview.
-1. Pinching a card's plus button adds one to its count, and pinching minus takes one away.
-2. A card turns amber when its count drops below par, and red at zero.
-3. Pull List lists every shelf under par with how many to pull, or "All at par" if none are.
-4. Cards stay on the shelf edges at real size while I walk around in the preview.
+1. Pinching an item on the Find panel lights up that item's bins and card. Pinching another item switches the highlight, and the highlight clears after a take, a second pinch, or 20 seconds.
+2. When the found bins are out of view, an arrow points toward them, and it hides once they are in view.
+3. A hand reaching into a bin and back out lowers that shelf's count by one. A hand passing in front of the bins without entering does not. Plus on the card undoes it.
+4. A card turns amber below par and red at zero, and Pull List lists every shelf under par with how many to pull, or "All at par".
+5. Cards stay on the shelf edges at real size while I walk around in the preview.
 
 ## Out of scope
-- Recognizing or counting real items automatically.
+- Voice recognition in the preview (on glasses only).
+- Camera recognition of which item was taken.
+- Telling a take apart from putting an item back (the plus button corrects it).
 - Connecting to a hospital materials management or requisition system.
-- Changing par levels (can come later).
-- Saving counts between sessions, or sending an actual order.
+- Changing par levels, saving counts between sessions, or sending an actual order.
 - More than one shelf unit or supply room.
-- Anything involving patients or patient data.
+- Anything involving patients, patient data, or medications.
 
 ## Risks and open questions
-- Feel unproven: whether pinching card buttons is comfortable in gloves with hands full of stock, and how reliable real hand tracking is at that distance.
-- In the preview, "looking at a shelf" follows where the camera points (your head), not your eyes. Real glasses would behave the same way, but it may dim cards you're glancing at sideways.
-- The glasses' view is narrow, so from 1 m away you'll see about one or two shelves at a time and tilt your head to see the rest. At the start view all three cards are below eye level, so they start dimmed until you look down at a shelf.
-- Hospital adoption would need IT and infection-control sign-off on the glasses themselves (cleaning, shared devices).
+- Feel unproven: whether take detection is reliable with real hands, gloves and quick reaches, and how often a reach without a take fools it.
+- Putting an item back reads as a take. The plus button corrects it; a real version would need the camera.
+- Voice may work only on device. If so, the demo shows tap-to-find and describes voice.
+- In the preview, "looking at" follows the camera (your head), not your eyes.
+- Hospital adoption would need IT and infection-control sign-off on the glasses (cleaning, shared devices).
 
 ## Build notes for CLAD
 - Build for SPECS so it runs and can be demonstrated in Lens Studio's preview. No SPECS device is available.
 - Use Spectacles Interaction Kit (SIK) and UI Kit for all interactions, so they work with the mouse in Interactive Preview and with LEAF.
-- Build any stand-in exactly as described above, and keep it obvious in the scene.
+- Keep the existing shelf model, cards, Pull List and tests; add Find, highlight, arrow and take detection on top.
 - Use real-world scale in centimeters. Keep content inside the user's view during the main task.
-- The display is additive: black renders as transparent. Don't rely on black or very dark content to be seen; keep text light and readable from where the user stands.
-- Get the basic flow working first, then add detail.
+- The display is additive: black renders as transparent. Keep text and highlights light and readable.
 - Write LEAF scenarios for each done criterion, run them in preview, and report which pass. Say which criteria have no test.
 - Don't record, identify, or follow people.
 

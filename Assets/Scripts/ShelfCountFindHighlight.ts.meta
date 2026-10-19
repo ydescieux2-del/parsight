@@ -1,0 +1,57 @@
+- !<AssetImportMetadata/ecd59f73-fa18-425d-94f4-4959b3b67fee>
+  ImportedAssetIds:
+    TypeScriptAsset: !<reference> 487af67c-2954-4ff2-bd9c-70333334602b
+  ImporterName: TypeScriptAssetImporter
+  PrimaryAsset: !<reference> 487af67c-2954-4ff2-bd9c-70333334602b
+  PackageType: NotAPackage
+  LegacyPackagePolicy: ~
+  ExtraData:
+    {}
+  AssetDataMap:
+    TypeScriptAsset: !<own> 21066bf2-a703-4916-867e-39b9d0ef3631
+  DependentFiles:
+    []
+  ImporterSettings: !<AssetImporterSettings>
+    {}
+  CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
+- !<TypeScriptAssetData/21066bf2-a703-4916-867e-39b9d0ef3631>
+  SvgIcon: ""
+  SetupScript:
+    code: ""
+  Description: ""
+  VersionMajor: 0
+  VersionMinor: 0
+  VersionPatch: 0
+  VersionPrerelease: ""
+  UpdateOrder: 0
+  ComponentUid: 668589ae-fa3a-4446-9b3d-a8f6e76d80ed
+  ExportUid: 00000000-0000-0000-0000-000000000000
+  PackagePolicy: CanBeUnpacked
+  ScriptInputsHidden:
+    edgeMaterial: false
+    fillColor: false
+    glowColor: false
+    glowMaterial: false
+  ScriptTypesHidden:
+    {}
+  ReadMe: !<reference> 00000000-0000-0000-0000-000000000000
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000
+  Tags:
+    []
+  Attachments:
+    []
+  DefaultScriptInputs:
+    - edgeMaterial: !<reference.Material> 00000000-0000-0000-0000-000000000000
+      glowMaterial: !<reference.Material> 00000000-0000-0000-0000-000000000000
+      glowColor: !<Vec4> {x: 0.250000, y: 0.950000, z: 1.000000, w: 1.000000}
+      fillColor: !<Vec4> {x: 0.060000, y: 0.300000, z: 0.360000, w: 1.000000}
+  ScriptTypes:
+    -
+      {}
+  InputLines:
+    - '// @ui {"widget":"label", "label":"<span style=\"color: #60A5FA;\">ShelfCountFindHighlight – glowing bin outlines</span>"}'
+    - '// @ui {"widget":"separator"}'
+    - '// @input Asset.Material edgeMaterial {"hint":"Unlit vertex-color material for the solid outline (additive glow vanishes on the light bins)"}'
+    - '// @input Asset.Material glowMaterial {"hint":"Additive glow material that uses vertex color, for the soft fill"}'
+    - '// @input vec4 glowColor = "{0.25,0.95,1.0,1.0}" {"hint":"Outline color", "widget":"color"}'
+    - "// @input vec4 fillColor = \"{0.06,0.3,0.36,1.0}\" {\"hint\":\"Soft fill across each bin's floor and back wall (additive, so keep it dim)\", \"widget\":\"color\"}"

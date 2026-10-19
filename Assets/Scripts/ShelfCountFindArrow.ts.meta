@@ -1,0 +1,66 @@
+- !<AssetImportMetadata/fae052b8-54c2-4131-a048-88216c80b917>
+  ImportedAssetIds:
+    TypeScriptAsset: !<reference> 87fee8cf-abd2-4a7c-befe-1423a5e0c7d3
+  ImporterName: TypeScriptAssetImporter
+  PrimaryAsset: !<reference> 87fee8cf-abd2-4a7c-befe-1423a5e0c7d3
+  PackageType: NotAPackage
+  LegacyPackagePolicy: ~
+  ExtraData:
+    {}
+  AssetDataMap:
+    TypeScriptAsset: !<own> d54f420e-56c4-478f-945c-73021d1cb372
+  DependentFiles:
+    []
+  ImporterSettings: !<AssetImporterSettings>
+    {}
+  CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
+- !<TypeScriptAssetData/d54f420e-56c4-478f-945c-73021d1cb372>
+  SvgIcon: ""
+  SetupScript:
+    code: ""
+  Description: ""
+  VersionMajor: 0
+  VersionMinor: 0
+  VersionPatch: 0
+  VersionPrerelease: ""
+  UpdateOrder: 0
+  ComponentUid: 745c8d0f-279e-43ed-b51e-b018ebc078ca
+  ExportUid: 00000000-0000-0000-0000-000000000000
+  PackagePolicy: CanBeUnpacked
+  ScriptInputsHidden:
+    cameraObject: false
+    displayCase: false
+    distanceCm: false
+    glowColor: false
+    glowMaterial: false
+    offsetCm: false
+    showAngleDeg: false
+  ScriptTypesHidden:
+    {}
+  ReadMe: !<reference> 00000000-0000-0000-0000-000000000000
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000
+  Tags:
+    []
+  Attachments:
+    []
+  DefaultScriptInputs:
+    - cameraObject: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      displayCase: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      glowMaterial: !<reference.Material> 00000000-0000-0000-0000-000000000000
+      glowColor: !<Vec4> {x: 0.250000, y: 0.950000, z: 1.000000, w: 1.000000}
+      showAngleDeg: !<float> 25.000000
+      distanceCm: !<float> 100.000000
+      offsetCm: !<float> 13.000000
+  ScriptTypes:
+    -
+      {}
+  InputLines:
+    - '// @ui {"widget":"label", "label":"<span style=\"color: #60A5FA;\">ShelfCountFindArrow – points to out-of-view bins</span>"}'
+    - '// @ui {"widget":"separator"}'
+    - // @input SceneObject cameraObject
+    - '// @input SceneObject displayCase {"hint":"The DisplayCase object; bins are defined in its local space"}'
+    - '// @input Asset.Material glowMaterial {"hint":"Unlit vertex-color material (solid, so the arrow reads against any background)"}'
+    - '// @input vec4 glowColor = "{0.25,0.95,1.0,1.0}" {"widget":"color"}'
+    - '// @input float showAngleDeg = 25 {"hint":"Show the arrow when the bins are farther than this from the view center (brief: 25)", "widget":"slider", "min":10, "max":45, "step":1}'
+    - '// @input float distanceCm = 100 {"hint":"How far ahead of the eyes the arrow floats (cm)"}'
+    - '// @input float offsetCm = 13 {"hint":"How far from the view center, toward the bins, the arrow sits (cm at that distance)"}'

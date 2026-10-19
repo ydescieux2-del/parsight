@@ -1,0 +1,60 @@
+- !<AssetImportMetadata/a2dd1fda-1dc2-4efb-a36d-33a849e8eedf>
+  ImportedAssetIds:
+    TypeScriptAsset: !<reference> 87eeb4eb-7b18-4dd7-aaf8-a7e347331164
+  ImporterName: TypeScriptAssetImporter
+  PrimaryAsset: !<reference> 87eeb4eb-7b18-4dd7-aaf8-a7e347331164
+  PackageType: NotAPackage
+  LegacyPackagePolicy: ~
+  ExtraData:
+    {}
+  AssetDataMap:
+    TypeScriptAsset: !<own> c548a128-4035-4807-9aa1-906b2b2136f1
+  DependentFiles:
+    []
+  ImporterSettings: !<AssetImporterSettings>
+    {}
+  CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
+- !<TypeScriptAssetData/c548a128-4035-4807-9aa1-906b2b2136f1>
+  SvgIcon: ""
+  SetupScript:
+    code: ""
+  Description: ""
+  VersionMajor: 0
+  VersionMinor: 0
+  VersionPatch: 0
+  VersionPrerelease: ""
+  UpdateOrder: 0
+  ComponentUid: 271a4db2-404c-4fb2-9f83-767667d609b8
+  ExportUid: 00000000-0000-0000-0000-000000000000
+  PackagePolicy: CanBeUnpacked
+  ScriptInputsHidden:
+    buttonHeightCm: false
+    keys: false
+    labels: false
+  ScriptTypesHidden:
+    {}
+  ReadMe: !<reference> 00000000-0000-0000-0000-000000000000
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000
+  Tags:
+    []
+  Attachments:
+    []
+  DefaultScriptInputs:
+    - keys: !<string[]>
+        - Flushes
+        - IVStart
+        - Foley
+      labels: !<string[]>
+        - Saline Flush
+        - IV Start Kit
+        - Foley Kit
+      buttonHeightCm: 4.500000
+  ScriptTypes:
+    -
+      {}
+  InputLines:
+    - '// @ui {"widget":"label", "label":"<span style=\"color: #60A5FA;\">ShelfCountFindPanelUI – find an item</span>"}'
+    - '// @ui {"widget":"separator"}'
+    - '// @input string[] keys = {"Flushes","IVStart","Foley"} {"hint":"Shelf keys, in button order"}'
+    - '// @input string[] labels = {"Saline Flush","IV Start Kit","Foley Kit"} {"hint":"Button labels, same order as keys"}'
+    - '// @input float buttonHeightCm = 4.5 {"hint":"Button height in cm (big pinch targets)", "widget":"slider", "min":3, "max":7, "step":0.5}'

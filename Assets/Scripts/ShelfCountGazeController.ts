@@ -41,11 +41,17 @@ export class ShelfCountGazeController extends BaseScriptComponent {
   private cards: ShelfCountCardUI[] = []
   private opacities: number[] = []
   private focused: boolean[] = []
+  private pinned: ShelfCountCardUI | null = null
 
   setCards(cards: ShelfCountCardUI[]): void {
     this.cards = cards
     this.opacities = cards.map(() => 1)
     this.focused = cards.map(() => true)
+  }
+
+  /** Keep one card at full brightness wherever the user looks (the item being found). */
+  setPinned(card: ShelfCountCardUI | null): void {
+    this.pinned = card
   }
 
   /** For tests: is card i currently in the focus cone. */
@@ -69,7 +75,7 @@ export class ShelfCountGazeController extends BaseScriptComponent {
       const len = toCard.length
       const inCone = len > 0.001 && toCard.uniformScale(1 / len).dot(viewDir) >= cosLimit
       this.focused[i] = inCone
-      const target = inCone ? 1 : this.dimOpacity
+      const target = inCone || card === this.pinned ? 1 : this.dimOpacity
       const cur = this.opacities[i]
       const step = this.fadeSpeed * dt
       const next = Math.abs(target - cur) <= step ? target : cur + Math.sign(target - cur) * step
